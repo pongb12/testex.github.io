@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Thi Online v2 - Bảo Mật Nâng Cấp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============ MÀN HÌNH ĐĂNG NHẬP ============ -->
+    <div id="login-screen" class="screen">
+        <div class="login-box">
+            <h1>🎓 Hệ Thống Thi Online v2</h1>
+            <p class="subtitle">Môn: Tin học đại cương — Thời gian: 10 phút</p>
+            <input type="text" id="student-name" placeholder="Nhập họ tên thí sinh" maxlength="50">
+            <button id="btn-start" class="btn-primary">📝 Bắt đầu làm bài</button>
+            <div class="rules">
+                <h3>⚠️ Quy định thi (bảo mật v2)</h3>
+                <ul>
+                    <li>Bắt buộc chế độ <b>TOÀN MÀN HÌNH</b></li>
+                    <li>Thoát fullscreen / chuyển tab → <b>CẢNH BÁO ĐỎ</b> + ghi log</li>
+                    <li>Chặn: copy/paste, chuột phải, zoom, F12, PrintScreen</li>
+                    <li>Vi phạm <b>3 lần</b> → tự động nộp bài</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MÀN HÌNH THI ============ -->
+    <div id="exam-screen" class="screen hidden">
+        <div id="warning-banner" class="hidden">
+            ⚠️ CẢNH BÁO: Phát hiện vi phạm! Vi phạm <span id="violation-count">0</span>/3
+            <button id="btn-refocus">🔒 Quay lại toàn màn hình</button>
+        </div>
+
+        <!-- Watermark chống chụp màn hình -->
+        <div id="watermark"></div>
+
+        <header class="exam-header">
+            <div>
+                <b id="display-name">Thí sinh: ...</b>
+                <span id="status-badge" class="badge badge-safe">🟢 An toàn</span>
+            </div>
+            <div id="timer" class="timer">⏱ 10:00</div>
+            <div>Vi phạm: <span id="violation-count-2" class="vcount">0</span>/3</div>
+        </header>
+
+        <main class="exam-body">
+            <aside class="question-nav" id="question-nav"></aside>
+            <section class="question-area">
+                <div id="question-text"></div>
+                <div id="options"></div>
+                <div class="nav-buttons">
+                    <button id="btn-prev" class="btn-secondary">← Trước</button>
+                    <button id="btn-next" class="btn-secondary">Sau →</button>
+                    <button id="btn-submit" class="btn-danger">Nộp bài</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============ MODAL XÁC NHẬN NỘP BÀI (fix lỗi thoát fullscreen) ============ -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h3>📄 Xác nhận nộp bài</h3>
+            <p id="confirm-msg"></p>
+            <div class="modal-buttons">
+                <button id="btn-modal-cancel" class="btn-secondary">Tiếp tục làm bài</button>
+                <button id="btn-modal-ok" class="btn-danger">Nộp bài</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MÀN HÌNH KẾT QUẢ ============ -->
+    <div id="result-screen" class="screen hidden">
+        <div class="result-box">
+            <h1 id="result-title">Kết quả</h1>
+            <div id="result-score"></div>
+            <div id="result-detail"></div>
+            <div id="violation-log"></div>
+            <button onclick="localStorage.removeItem('examSession'); location.reload()" class="btn-primary">Làm lại</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #eef2f7;
+    min-height: 100vh;
+}
+.hidden { display: none !important; }
+.screen { min-height: 100vh; }
+
+/* ============ LOGIN ============ */
+#login-screen {
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1a2a6c, #2a5298);
+}
+.login-box {
+    background: #fff; padding: 40px; border-radius: 16px;
+    width: 500px; max-width: 95vw; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+}
+.login-box h1 { color: #1a2a6c; margin-bottom: 8px; }
+.subtitle { color: #666; margin-bottom: 24px; }
+#student-name {
+    width: 100%; padding: 14px; font-size: 16px;
+    border: 2px solid #ccc; border-radius: 8px; margin-bottom: 16px;
+}
+#student-name:focus { border-color: #2a5298; outline: none; }
+.rules {
+    text-align: left; background: #fff8e1; border: 1px solid #f0c040;
+    border-radius: 10px; padding: 16px; margin-top: 20px; font-size: 14px;
+}
+.rules ul { margin: 8px 0 0 20px; }
+.rules li { margin: 4px 0; }
+
+/* ============ BUTTONS ============ */
+.btn-primary {
+    background: #2a5298; color: #fff; padding: 14px 32px;
+    border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.btn-primary:hover { background: #1a2a6c; }
+.btn-secondary {
+    background: #e0e0e0; border: none; padding: 10px 20px;
+    border-radius: 6px; cursor: pointer;
+}
+.btn-danger {
+    background: #d32f2f; color: #fff; border: none;
+    padding: 10px 20px; border-radius: 6px; cursor: pointer;
+}
+
+/* ============ EXAM ============ */
+.exam-header {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fff; padding: 14px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    position: sticky; top: 0; z-index: 10;
+}
+.timer {
+    font-size: 22px; font-weight: bold; color: #1a2a6c;
+    background: #eef2f7; padding: 6px 18px; border-radius: 20px;
+}
+.timer.warning { color: #d32f2f; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .5; } }
+
+.badge { padding: 4px 12px; border-radius: 12px; font-size: 13px; margin-left: 10px; }
+.badge-safe { background: #c8e6c9; color: #1b5e20; }
+.badge-danger { background: #ffcdd2; color: #b71c1c; animation: blink 1s infinite; }
+.vcount { font-weight: bold; }
+
+.exam-body { display: flex; max-width: 1100px; margin: 24px auto; gap: 20px; padding: 0 16px; }
+.question-nav { width: 80px; display: flex; flex-direction: column; gap: 8px; }
+.q-nav-btn {
+    padding: 10px 0; border: 2px solid #ccc; background: #fff;
+    border-radius: 8px; cursor: pointer; font-weight: bold;
+}
+.q-nav-btn.answered { background: #2a5298; color: #fff; border-color: #2a5298; }
+.q-nav-btn.current { border-color: #ff9800; box-shadow: 0 0 0 3px #ffe0b2; }
+
+.question-area {
+    flex: 1; background: #fff; border-radius: 14px; padding: 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+#question-text { font-size: 19px; font-weight: 600; margin-bottom: 20px; }
+.option {
+    display: block; padding: 14px 18px; margin: 10px 0;
+    border: 2px solid #ddd; border-radius: 10px; cursor: pointer;
+    transition: .15s; user-select: none;
+}
+.option:hover { border-color: #2a5298; background: #f0f5ff; }
+.option.selected { border-color: #2a5298; background: #e3ecff; }
+.nav-buttons { margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end; }
+
+/* ============ WATERMARK ============ */
+#watermark {
+    position: fixed; inset: 0; z-index: 5; pointer-events: none;
+    background-image: repeating-linear-gradient(
+        -45deg, transparent, transparent 240px,
+        rgba(0,0,0,.045) 240px, rgba(0,0,0,.045) 241px);
+}
+#watermark::after {
+    content: attr(data-mark);
+    position: absolute; right: 20px; bottom: 16px;
+    font-size: 13px; color: rgba(0,0,0,.35); font-weight: bold;
+}
+
+/* ============ WARNING BANNER ============ */
+#warning-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: #d32f2f; color: #fff; padding: 16px 24px;
+    font-size: 17px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    animation: shake .4s, blink 1.2s infinite;
+}
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+#btn-refocus {
+    background: #fff; color: #d32f2f; border: none;
+    padding: 8px 18px; border-radius: 6px; font-weight: bold; cursor: pointer;
+}
+
+/* ============ MODAL XÁC NHẬN (thay confirm()) ============ */
+.modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,.55);
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-box {
+    background: #fff; border-radius: 14px; padding: 30px;
+    width: 380px; max-width: 92vw; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.modal-box h3 { color: #1a2a6c; margin-bottom: 12px; }
+.modal-box p { color: #555; margin-bottom: 22px; }
+.modal-buttons { display: flex; gap: 12px; justify-content: center; }
+
+/* ============ RESULT ============ */
+#result-screen { display: flex; align-items: center; justify-content: center; }
+.result-box {
+    background: #fff; padding: 40px; border-radius: 16px;
+    width: 580px; max-width: 95vw; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,.15);
+}
+#result-score { font-size: 48px; font-weight: bold; color: #1a2a6c; margin: 16px 0; }
+#result-detail { color: #555; margin-bottom: 16px; }
+#violation-log {
+    text-align: left; background: #ffebee; border-radius: 8px;
+    padding: 14px; font-size: 13px; max-height: 200px; overflow-y: auto;
+    margin-bottom: 20px;
+}
